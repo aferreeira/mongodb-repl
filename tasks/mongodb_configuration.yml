@@ -1,0 +1,9 @@
+---
+- name: MONGODB 3.4 | Copiar o arquivo de configuração do MongoDB
+  copy: src=files/mongod.conf dest=/etc/mongod.conf backup=yes
+
+- name: MONGODB 3.4 | Copiar o arquivo de chave do replica set do MongoDB
+  copy: src=files/mongodb-keyfile dest=/etc/mongodb-keyfile mode=0600 owner=mongod group=mongod
+
+- name: MONGODB 3.4 | start Mongodb service
+  service: state=started name=mongod

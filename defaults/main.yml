@@ -1,0 +1,13 @@
+---
+mongodb01_ip_server: '10.0.0.1'
+mongodb02_ip_server: '10.0.0.2'
+mongodb03_ip_server: '10.0.0.3'
+mongodb01_server_name: 'srv01-hostname'
+mongodb02_server_name: 'srv02-hostname'
+mongodb03_server_name: 'srv03-hostname'
+proxyinfo: 'http://<domain>\\<username>:<password>@<ipproxy>:<portproxy>'
+admin_db_password: 'senha123mudar'
+lvpath_mongodb: '/dev/mapper/lv-mongodb'
+app_db_name: 'app-db-name'
+app_userdb_name: 'app_userdb_name'
+app_userdb_password: 'senhauser123mudar'

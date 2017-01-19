@@ -1,0 +1,6 @@
+---
+- name: MONGODB 3.4 | Instalação do Mongodb
+  yum: name=mongodb-org.x86_64 state=latest
+
+- name: MONGODB 3.4 | Criar diretorio para mongodb 
+  file: path=/mongodb state=directory owner=mongod group=mongod

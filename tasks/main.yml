@@ -1,0 +1,12 @@
+---
+- name: Requirements first
+  include: requirements.yml
+
+- name: Mongodb Instalation
+  include: mongodb_instalation.yml
+
+- name: Mongodb Configuration
+  include: mongodb_configuration.yml
+
+- name: Create database and users in mongodb
+  include: mongodb_db_user_creation.yml

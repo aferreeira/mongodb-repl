@@ -1,0 +1,27 @@
+---
+- name: MONGODB 3.4 | Criar database admin
+  mongodb_user: database=admin name=root password={{ admin_db_password }} state=present roles=root db=admin
+  run_once: true
+
+- name: MONGODB 3.4 | Parar o serviço Mongodb
+  service: state=stopped name=mongod
+
+- name: MONGODB 3.4 | Habilitar a autenticação no mongodb
+  lineinfile:
+    dest: /etc/mongod.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^auth=false', line: 'auth=true' }
+    - { regexp: '^#replSet=rs0', line: 'replSet=rs0' }
+
+- name: MONGODB 3.4 | Iniciar o serviço Mongodb
+  service: state=started name=mongod
+
+- name: MONGODB 3.4 | Iniciar ReplicaSet e os Nós
+  command: mongo --username root --password {{ admin_db_password }} --authenticationDatabase admin --quiet --eval "rs.initiate();rs.add('{{ mongodb02_server_name }}:27017');rs.add('{{ mongodb03_server_name }}:27017')"
+  run_once: true
+
+- name: MONGODB 3.4 | Criar as bases, usuários e senhas que as aplicações irão utilizar
+  command: mongo --username root --password {{ admin_db_password }} --authenticationDatabase admin --quiet --eval "use {{ app_db_name }}; db.teste.insert({"name":"{{ app_db_name }}"}); db.createUser( { user: "{{ app_userdb_name }}", pwd: "{{ app_userdb_password }}", roles: [ { role: "dbAdmin", role: "dbOwner", db: "{{ app_db_name }}" } ] })"
+  run_once: true
