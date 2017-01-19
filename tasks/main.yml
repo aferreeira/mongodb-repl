@@ -1,12 +1,12 @@
 ---
-- name: Requirements first
+- name: MONGODB 3.4 | Primeiros requisitos
   include: requirements.yml
 
-- name: Mongodb Instalation
+- name: MONGODB 3.4 | Instalação do Mongodb
   include: mongodb_instalation.yml
 
-- name: Mongodb Configuration
+- name: MONGODB 3.4 | Configuração do Mongodb
   include: mongodb_configuration.yml
 
-- name: Create database and users in mongodb
+- name: MONGODB 3.4 | Criar databases e usuários no Mongodb
   include: mongodb_db_user_creation.yml
